@@ -664,7 +664,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Check for initial hash on load
+            // Initial render based on URL
             handleHashChange();
             // Attach hashchange listener for back/forward buttons
             window.addEventListener('hashchange', handleHashChange);
@@ -676,20 +676,34 @@
             lucide.createIcons();
         });
 
-        // --- CORE NAVIGATION FUNCTIONS ---
+        // --- CORE NAVIGATION FUNCTIONS (FIXED HASH ROUTING) ---
         
         // Central function to control which page is visible based on the URL hash
         function handleHashChange() {
             const hash = window.location.hash.replace('#', '');
-            const targetPageId = hash || 'page-home'; // Default to home page if hash is empty
+            
+            // Map the hash to the correct page ID
+            let targetPageId;
+            if (hash === '' || hash === 'home') {
+                targetPageId = 'page-home';
+            } else if (hash === 'shop') {
+                targetPageId = 'page-shop';
+            } else if (hash === 'checkout') {
+                targetPageId = 'page-checkout';
+            } else if (hash.startsWith('why-choose-us-section') || hash.startsWith('heritage-section') || hash.startsWith('bestsellers-section')) {
+                 targetPageId = 'page-home';
+            } else {
+                targetPageId = 'page-home'; // Fallback
+            }
 
+            // Step 1: Toggle visibility of the main pages
             document.querySelectorAll('.page').forEach(p => {
                 const isActive = p.id === targetPageId;
                 if (isActive) {
                     p.style.display = 'block';
                     p.classList.add('active');
+                    // Render shop products only when activating the shop page
                     if (targetPageId === 'page-shop') {
-                        // Re-render products when loading the shop page
                         renderShopProducts('All');
                     }
                 } else {
@@ -697,30 +711,29 @@
                     p.style.display = 'none';
                 }
             });
-            lucide.createIcons();
-        }
 
-        // Renamed/Simplified original showPage to update hash
-        function showPage(pageId) {
-            // This function is now simplified: just update the hash
-            // The handleHashChange listener will do the actual page switching
-            const hashName = pageId.replace('page-', '#');
-            window.location.hash = hashName;
-        }
-
-        // Integrated scroll logic (used for 'Why Us' button)
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                // Ensure we are on the home page first if navigating to a section anchor
-                if (window.location.hash !== '#home' && window.location.hash !== '') {
-                    window.location.hash = '#home';
-                    // Delay scroll to allow hash change animation/page switch to complete
-                    setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 300);
-                } else {
+            // Step 2: Handle internal scrolling (only when hash matches an internal anchor)
+            if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
+                const element = document.getElementById(hash);
+                if (element) {
+                    // Use standard scrollIntoView now that the page is visible
                     element.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+            
+            lucide.createIcons();
+        }
+
+        // Simplified function to update hash for navigation
+        function showPage(pageId) {
+             const hashName = pageId === 'page-home' ? '' : `#${pageId.replace('page-', '')}`;
+             window.location.hash = hashName;
+        }
+
+        // Updated scrolling to use hash routing
+        function scrollToSection(id) {
+            // Change hash to the section ID. This will trigger handleHashChange.
+            window.location.hash = `#${id}`;
         }
         
         // --- RENDERERS ---
@@ -757,284 +770,6 @@
                     <button class="w-full py-3 bg-punjab-cream text-punjab-dark rounded-xl hover:bg-punjab hover:text-white transition-colors font-medium flex items-center justify-center gap-2 mt-2" onclick="event.stopPropagation(); showPage('page-shop')">
                         Explore More <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
-                `;
-            } else {
-                // Initial Button State rendered based on initial variant (if applicable)
-                if (inCart > 0) {
-                    footerHtml = `
-                        <div class="flex items-center justify-between bg-punjab-cream rounded-xl p-1 mt-2" onclick="event.stopPropagation()">
-                            <button onclick="updateItemQty('${currentCompositeId}', -1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg">-</button>
-                            <span class="font-bold text-punjab-dark text-lg">${inCart}</span>
-                            <button onclick="updateItemQty('${currentCompositeId}', 1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg">+</button>
-                        </div>
-                    `;
-                } else {
-                    footerHtml = `
-                        <button class="w-full py-3 bg-punjab-cream text-punjab-dark rounded-xl hover:bg-punjab hover:text-white transition-colors font-medium flex items-center justify-center gap-2 mt-2" 
-                                onclick="event.stopPropagation(); addToCartFromCard(this, '${p.id}', event)">
-                            Add to Cart <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                        </button>
-                    `;
-                }
-            }
-
-            let slidesHtml = `<div class="swiper-slide"><img src="${p.img1}" alt="${p.name} Image 1" class="w-full h-full object-cover"></div>`;
-            if (p.img2) {
-                slidesHtml += `<div class="swiper-slide"><img src="${p.img2}" alt="${p.name} Image 2" class="w-full h-full object-cover"></div>`;
-            }
-
-            // --- BADGES ---
-            let badgesHtml = '';
-            if (p.isBestseller) {
-                badgesHtml += `<span class="bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md">BESTSELLER</span>`;
-            }
-            if (p.discount) {
-                badgesHtml += `<span class="bg-punjab-gold text-punjab-soil text-[10px] font-bold px-3 py-1 rounded-full shadow-md ml-1">-${p.discount}% OFF</span>`;
-            }
-            
-            // Staggered fade-in animation for shop items
-            const animationClass = type === 'shop' 
-                ? `opacity-0 animate-product-fade-in [animation-delay:${index * 75}ms]` 
-                : ''; // FIX: Only apply opacity-0 and animation to shop items
-
-            return `
-                <div class="${type === 'bestseller' ? 'swiper-slide' : ''} group bg-white rounded-3xl p-4 shadow-sm hover:shadow-float transition-all duration-300 border border-gray-100 card-3d h-full flex flex-col ${animationClass}" id="card-${p.id}">
-                    <div class="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-punjab-cream">
-                        <div class="absolute top-3 left-3 z-10 flex items-center">${badgesHtml}</div>
-                        <div class="swiper mini-swiper ${swiperId}">
-                            <div class="swiper-wrapper">${slidesHtml}</div>
-                        </div>
-                        <div class="absolute bottom-3 right-3 bg-white p-2 rounded-full shadow-md text-punjab opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 cursor-pointer" onclick="openModal('${p.id}')">
-                            <i data-lucide="eye" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div class="px-2 flex-grow cursor-pointer flex flex-col" onclick="openModal('${p.id}')">
-                        <span class="text-[10px] uppercase font-bold text-punjab-gold tracking-widest">${p.category}</span>
-                        <h3 class="font-serif text-lg font-bold text-gray-800 leading-tight mb-1 group-hover:text-punjab transition-colors line-clamp-1">${p.name}</h3>
-                        
-                        ${type === 'shop' ? `
-                            <div class="mb-2">
-                                ${variantHtml}
-                                <div class="flex items-baseline gap-1">
-                                    <span class="block text-xl font-bold text-punjab-dark" id="${priceId}">₹${currentPrice}</span>
-                                    ${!p.variants ? `<span class="text-xs text-gray-400" id="${unitId}">/ ${currentUnit}</span>` : ''}
-                                </div>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="mt-auto footer-action-container" data-swiper-id="${swiperId}">
-                            ${footerHtml}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Handles price change AND triggers button state refresh
-        function updateCardPriceAndButton(select, pid, swiperId) {
-            // 1. Update Price Text
-            const price = select.options[select.selectedIndex].getAttribute('data-price');
-            document.getElementById(`price-${swiperId}`).innerText = `₹${price}`;
-            
-            // 2. Refresh Button State
-            refreshCardButton(pid);
-        }
-
-        function addToCartFromCard(btn, pid, event) {
-            const card = btn.closest('.card-3d');
-            let variantUnit = null;
-            
-            const select = card.querySelector('select');
-            if (select) {
-                variantUnit = select.value;
-            }
-
-            const compositeId = variantUnit ? `${pid}_${variantUnit}` : pid;
-            // No flying animation to maximize performance
-            addToCart(compositeId, 1, pid); 
-        }
-
-        function renderBestsellers() {
-            // Select specific IDs for Community Favorites (ensure they exist after update)
-            const bestsellerIds = ["p1", "p2", "p3", "p5", "p16", "p17"];
-            const bestsellers = products.filter(p => bestsellerIds.includes(p.id) && p.isBestseller); // Filter to only show relevant bestsellers
-            
-            const wrapper = document.getElementById('bestseller-wrapper');
-            let html = '';
-            bestsellers.forEach(p => { html += createProductCard(p, 'bestseller'); });
-            wrapper.innerHTML = html;
-            
-            // Initialize the main Swiper instance
-            new Swiper('.bestseller-swiper', {
-                slidesPerView: 1, spaceBetween: 30, loop: true,
-                autoplay: { delay: 4000, disableOnInteraction: false },
-                navigation: { nextEl: '.bestseller-next', prevEl: '.bestseller-prev' },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: { 
-                    640: { slidesPerView: 2 }, 
-                    1024: { slidesPerView: 3 }, 
-                    1280: { slidesPerView: 4 } 
-                }
-            });
-
-            // Initialize mini swipers and icons for the rendered cards (Crucial fix for visibility)
-            initMiniSwipers(wrapper);
-            lucide.createIcons();
-        }
-
-        function renderShopProducts(cat) {
-            const grid = document.getElementById('product-grid');
-            // Filter by category, now including 'Sweeteners'
-            const filtered = cat === 'All' 
-                ? products 
-                : products.filter(p => p.category === cat);
-            let html = '';
-            // Pass index for staggered animation
-            filtered.forEach((p, index) => { html += createProductCard(p, 'shop', index); });
-            grid.innerHTML = html;
-            
-            // Initialize mini swipers for the newly rendered cards
-            initMiniSwipers(grid);
-            lucide.createIcons(); // Re-create icons for newly injected HTML
-        }
-
-        function initMiniSwipers(container) {
-            // Target only the uninitialized swipers within the container
-            const swipers = container.querySelectorAll('.mini-swiper:not(.swiper-initialized)');
-            swipers.forEach(el => {
-                new Swiper(el, {
-                    spaceBetween: 0,
-                    centeredSlides: true,
-                    // Slightly varied autoplay delay to avoid all swipers moving simultaneously
-                    autoplay: { delay: 3000 + Math.random() * 2000, disableOnInteraction: false },
-                    effect: 'fade',
-                    fadeEffect: { crossFade: true },
-                    loop: el.querySelectorAll('.swiper-slide').length > 1, 
-                    allowTouchMove: false
-                });
-            });
-        }
-
-        function filterProducts(cat) {
-            // FIX: Ensure non-active buttons switch correctly to text-punjab-dark
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('active', 'bg-punjab', 'text-white', 'border-punjab');
-                // Non-active state: White background, dark text
-                b.classList.add('text-punjab-dark', 'border-gray-300', 'bg-white');
-            });
-            // Active state: Green background, white text (fixed by CSS in <style>)
-            event.target.classList.add('active', 'bg-punjab', 'text-white', 'border-punjab');
-            event.target.classList.remove('text-punjab-dark', 'border-gray-300', 'bg-white');
-            renderShopProducts(cat);
-        }
-
-        // --- CORE NAVIGATION FUNCTIONS ---
-        
-        // This handles the visible page state and loads content based on hash
-        function handleHashChange() {
-            const hash = window.location.hash.replace('#', '');
-            const targetPageId = hash || 'page-home'; 
-            
-            const mainPages = ['page-home', 'page-shop', 'page-checkout'];
-            let currentPageId = 'page-home';
-
-            // Determine which main page is active
-            if (mainPages.includes(targetPageId)) {
-                 currentPageId = targetPageId;
-            } else if (targetPageId.startsWith('why-choose-us-section')) {
-                 currentPageId = 'page-home';
-            }
-
-            // Step 1: Toggle visibility of the main pages
-            document.querySelectorAll('.page').forEach(p => {
-                const isActive = p.id === currentPageId;
-                if (isActive) {
-                    p.style.display = 'block';
-                    p.classList.add('active');
-                } else {
-                    p.classList.remove('active');
-                    p.style.display = 'none';
-                }
-            });
-
-            // Step 2: Render content for the active page
-            if (currentPageId === 'page-shop') {
-                renderShopProducts('All');
-            }
-            
-            // Step 3: Handle internal scrolling (only on the home page)
-            if (currentPageId === 'page-home' && targetPageId !== 'page-home' && targetPageId !== '') {
-                const element = document.getElementById(targetPageId);
-                if (element) {
-                    // Use standard scrollIntoView now that the page is visible
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-            
-            lucide.createIcons();
-        }
-
-
-        // Simplified function to update hash for navigation
-        function showPage(pageId) {
-             const hashName = pageId === 'page-home' ? '' : `#${pageId.replace('page-', '')}`;
-             window.location.hash = hashName;
-        }
-        
-        // Updated scrolling to use hash routing
-        function scrollToSection(id) {
-            // Change hash to the section ID. This will trigger handleHashChange.
-            // If the section is on the home page, handleHashChange will ensure 'page-home' is active and then scroll to the element.
-            window.location.hash = `#${id}`;
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initial render based on URL
-            handleHashChange();
-            // Listener to handle back/forward buttons and anchor clicks
-            window.addEventListener('hashchange', handleHashChange);
-            
-            renderBestsellers();
-            updateCartUI();
-            
-            lucide.createIcons();
-        });
-
-
-        // --- RENDERERS ---
-
-        function createProductCard(p, type = 'shop', index = 0) {
-            const swiperId = `swiper-${p.id}-${Math.random().toString(36).substr(2, 9)}`;
-            
-            let variantHtml = '';
-            let currentPrice = p.price;
-            let currentUnit = p.unit;
-            
-            if (p.variants) {
-                variantHtml = `
-                    <select class="w-full mb-2 p-2 rounded-lg bg-white border border-gray-200 text-sm focus:outline-none focus:border-punjab text-gray-600 cursor-pointer" 
-                            onclick="event.stopPropagation()"
-                            onchange="updateCardPriceAndButton(this, '${p.id}', '${swiperId}')">
-                        ${p.variants.map(v => `<option value="${v.u}" data-price="${v.p}">${v.u}</option>`).join('')}
-                    </select>
-                `;
-                currentPrice = p.variants[0].p;
-                currentUnit = p.variants[0].u;
-            }
-
-            let footerHtml = '';
-            const priceId = `price-${swiperId}`;
-            const unitId = `unit-${swiperId}`;
-            
-            // Determine initial compositeId for cart check
-            const currentCompositeId = p.variants ? `${p.id}_${p.variants[0].u}` : p.id;
-            const inCart = cart[currentCompositeId] || 0;
-
-            if (type === 'bestseller') {
-                footerHtml = `
-                    <a href="#shop" class="w-full py-3 bg-punjab-cream text-punjab-dark rounded-xl hover:bg-punjab hover:text-white transition-colors font-medium flex items-center justify-center gap-2 mt-2" onclick="event.stopPropagation()">
-                        Explore More <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
                 `;
             } else {
                 // Initial Button State rendered based on initial variant (if applicable)
@@ -1206,42 +941,44 @@
             renderShopProducts(cat);
         }
 
-        // --- CORE FUNCTIONS ---
-        // This handles the visible page state and loads content based on hash
+        // --- CORE NAVIGATION FUNCTIONS ---
+        
+        // Central function to control which page is visible based on the URL hash
         function handleHashChange() {
             const hash = window.location.hash.replace('#', '');
-            const targetPageId = hash || 'page-home'; // Default to home page if hash is empty
             
-            const mainPages = ['page-home', 'page-shop', 'page-checkout'];
-            let currentPageId = 'page-home';
-
-            // Determine which main page is active
-            if (mainPages.includes(targetPageId)) {
-                 currentPageId = targetPageId;
-            } else if (targetPageId.startsWith('why-choose-us-section')) {
-                 currentPageId = 'page-home';
+            // Map the hash to the correct page ID
+            let targetPageId;
+            // FIX: Directly map hash to HTML IDs
+            if (hash === '' || hash === 'home') {
+                targetPageId = 'page-home';
+            } else if (hash === 'shop') {
+                targetPageId = 'page-shop';
+            } else if (hash === 'checkout') {
+                targetPageId = 'page-checkout';
+            } else {
+                targetPageId = 'page-home'; // Fallback
             }
 
             // Step 1: Toggle visibility of the main pages
             document.querySelectorAll('.page').forEach(p => {
-                const isActive = p.id === currentPageId;
+                const isActive = p.id === targetPageId;
                 if (isActive) {
                     p.style.display = 'block';
                     p.classList.add('active');
+                    // Render shop products only when activating the shop page
+                    if (targetPageId === 'page-shop') {
+                        renderShopProducts('All');
+                    }
                 } else {
                     p.classList.remove('active');
                     p.style.display = 'none';
                 }
             });
 
-            // Step 2: Render content for the active page
-            if (currentPageId === 'page-shop') {
-                renderShopProducts('All');
-            }
-            
-            // Step 3: Handle internal scrolling (only on the home page)
-            if (currentPageId === 'page-home' && targetPageId !== 'page-home' && targetPageId !== '') {
-                const element = document.getElementById(targetPageId);
+            // Step 2: Handle internal scrolling (only on the home page)
+            if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
+                const element = document.getElementById(hash);
                 if (element) {
                     // Use standard scrollIntoView now that the page is visible
                     element.scrollIntoView({ behavior: 'smooth' });
@@ -1260,7 +997,6 @@
         // Updated scrolling to use hash routing
         function scrollToSection(id) {
             // Change hash to the section ID. This will trigger handleHashChange.
-            // If the section is on the home page, handleHashChange will ensure 'page-home' is active and then scroll to the element.
             window.location.hash = `#${id}`;
         }
         
