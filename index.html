@@ -162,7 +162,7 @@
                     <!-- Background image/gradient applied via inline style for correct layering -->
                     <div class="absolute inset-0 z-10" 
                         style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), 
-                                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDEwfHx3aGVhdCUyMGZpZWelJTIwc3Vuc2V0fGVufDB8fHx8MTcwODY5MjYxN3ww&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;">
+                                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDEwfHx3aGVhdCUyMGZpZwelJTIwc3Vuc2V0fGVufDB8fHx8MTcwODY5MjYxN3ww&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;">
                     </div>
                 </div>
 
@@ -572,7 +572,8 @@
                 id: "p3", name: "Pure Coconut Oil", price: 899, unit: "1L", category: "Oils", 
                 img1: "https://i.ibb.co/JRkP18SM/cocnut.jpg", 
                 variants: [ {u: "100ml", p: 99}, {u: "500ml", p: 449}, {u: "1L", p: 899} ],
-                benefits: ["Raw, virgin, and woodpressed to retain MCTs for instant energy", "Excellent edible oil and natural moisturizer for skin", "Supports metabolism and healthy weight management"] 
+                benefits: ["Raw, virgin, and woodpressed to retain MCTs for instant energy", "Excellent edible oil and natural moisturizer for skin", "Supports metabolism and healthy weight management"],
+                isBestseller: true // Restoring best-seller status
             },
             // Pure Badam Oil (Keeping as is, as it's not in the update list but already uses charm pricing)
             { id: "p5", name: "Pure Badam Oil", price: 349, unit: "100ml", category: "Oils", img1: "https://i.ibb.co/7ttstkt7/almond-oil.jpg", benefits: ["Extracted from Gurbandi almonds for max Vitamin E", "Deeply nourishes skin, reducing dark circles and fine lines", "Perfect for baby massage to strengthen bones"] },
@@ -616,32 +617,24 @@
                 benefits: ["Sourced from MP's Malwa region, known for premium golden grains", "Higher protein content (13%) for better muscle repair", "Absorbs more water, resulting in fluffier, tastier rotis"],
                 isBestseller: true, discount: 10
             },
-            // Multigrain atta: ₹120 -> ₹119 per kg
             { id: "p8", name: "Multigrain Atta", price: 119, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/MDNxgs00/multi.jpg", benefits: ["A powerful blend of 7 heritage grains: Wheat, Ragi, Bajra, Jowar, etc.", "Low GI (55) helps manage blood sugar and insulin levels", "50% more fiber than regular atta for superior gut health"] },
-            // Ragi atta: ₹150 -> ₹149 per kg
             { id: "p9", name: "Ragi Atta", price: 149, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/d023GfJz/63bb1e96-ea50-432b-93ff-da15e5d7623a.png", img2: "https://i.ibb.co/4R7kQj06/ragi-millet-seed-500x500.webp", benefits: ["The ultimate Calcium king (344mg/100g) for bone density", "Excellent for growing kids and seniors", "Helps in weight loss by keeping you full for longer"] },
-            // Jowar atta: ₹130 -> ₹129 per kg
             { id: "p10", name: "Jowar Atta", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/RT8Xxvkj/83375485-4b49-41c8-be9f-561b99436307.png", img2: "https://i.ibb.co/5gs5J1hM/610-IDm9a-C5-L-SL1200.jpg", benefits: ["Naturally gluten-free and easy to digest", "High in complex carbs for sustained energy without the crash", "Cooling nature makes it perfect for summer diets"] },
-            // Jau atta: ₹130 -> ₹129 per kg
             { id: "p11", name: "Jau Atta (Barley)", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/KxczQb98/166355b5-a465-406f-9781-025c57e5b4f1.png", img2: "https://i.ibb.co/ds4DfSrb/Barley.jpg", benefits: ["Ancient cooling grain, famous as Sattu base", "Rich in Beta-glucan fiber to lower bad cholesterol", "Excellent for kidney health and flushing out toxins"] },
-            // Besan: ₹160 -> ₹159 per kg (500g variant adjusted)
             { id: "p12", name: "Besan (Chickpea)", price: 159, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/twHt1WcL/cd7e094a-34b2-4339-91eb-c4446f31529c.png", img2: "https://i.ibb.co/JjKPQPjM/besan-gram-flour-or-chickpea-flour-is-a-powder-made-from-ground-chickpea-known-as-bengal-gram-free-p.jpg", variants: [ {u: "500g", p: 79}, {u: "1kg", p: 159} ], benefits: ["Made from 100% Chana Dal, protein-packed (20g/100g)", "Essential for traditional Kadhi, Pakoras, and Chilla", "Great vegan egg substitute with a rich, nutty flavor"] },
-            // Dalia: ₹60 -> ₹59 for 500 gram (1kg variant adjusted)
             { id: "p13", name: "Dalia", price: 119, unit: "1kg", category: "Grains", img1: "https://i.ibb.co/tM976W1b/aa227679-7f64-4580-b9a0-c3661c2b3bec.png", variants: [ {u: "500g", p: 59}, {u: "1kg", p: 119} ], benefits: ["Whole broken wheat with high fiber content (12g/100g)", "Slow-release carbs provide sustained energy for the day", "Best breakfast for weight management and digestion"] },
-            // Haldi: ₹100 -> ₹99 for 250 gram
             { id: "p15", name: "Haldi (Turmeric)", price: 99, unit: "250g", category: "Spices", img1: "https://i.ibb.co/ym6yQGtL/haldi.jpg", benefits: ["High Curcumin content (7%) verified by lab tests", "Potent anti-inflammatory and immunity booster", "Essential for 'Golden Milk' healing rituals"] },
-            // Black wheat flour: ₹130 -> ₹129 per kg
+            // Black Wheat, added tags
             { 
                 id: "p16", name: "Black Wheat Flour", price: 129, unit: "1kg", category: "Heritage Flours", 
                 img1: "https://i.ibb.co/QvZ5tvcf/black-wheat-flour.jpg", img2: "https://i.ibb.co/N8WfCVp/organic-black-wheat-1713514180-7390923.jpg", 
                 benefits: ["Rich in Anthocyanins (powerful antioxidants found in blueberries)", "Low Glycemic Index (45) helps manage diabetes naturally", "Contains 40% more protein than regular white wheat"],
                 isBestseller: true, discount: 15
             },
-            // Paigambri wheat flour: ₹180 -> ₹179 per kg
+            // Paigambri wheat flour: ₹179 per kg
             { id: "p17", name: "Paigambari Wheat", price: 179, unit: "1kg", category: "Heritage Flours", img1: "https://i.ibb.co/Zp8qVrdY/paigambar-wheat-flour.jpg", img2: "https://i.ibb.co/TM561N6D/p-wheat.webp", benefits: ["4500-year-old Indus Valley heirloom strain", "Contains 267% more minerals (Zinc, Iron) than modern wheat", "Low gluten structure makes it easier to digest"] },
-            // Bansi wheat flour: ₹150 -> ₹149 per kg
             { id: "p18", name: "Bansi Wheat Flour", price: 149, unit: "1kg", category: "Heritage Flours", img1: "https://i.ibb.co/9m4scDfQ/bansi.jpg", img2: "https://i.ibb.co/xKn3wgDL/bansi2.jpg", benefits: ["Ancient variety known to fight obesity and inflammation", "Very low Glycemic Index (50) for metabolic health", "Rich, distinct taste that needs no additives"] },
-            // Makki atta: ₹110 -> ₹109 per kg
+            // Makki atta: ₹109 per kg
             { id: "p19", name: "Maize Flour (Makki Atta)", price: 109, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/pspPmBs/maize.jpg", benefits: ["Rich in Zinc, Iron and Vitamin A for good vision and skin", "Gluten-free winter staple, traditionally eaten with Sarson Saag", "High fiber content aids digestion and keeps you full longer"] }
         ];
 
@@ -680,44 +673,53 @@
         
         // Central function to control which page is visible based on the URL hash
         function handleHashChange() {
-            const hash = window.location.hash.replace('#', '');
+            // 1. Get the pure hash (e.g., "shop", "checkout", "why-us-section")
+            let hash = window.location.hash.replace('#', '');
             
-            // Map the hash to the correct page ID
-            let targetPageId;
-            if (hash === '' || hash === 'home') {
-                targetPageId = 'page-home';
-            } else if (hash === 'shop') {
-                targetPageId = 'page-shop';
-            } else if (hash === 'checkout') {
-                targetPageId = 'page-checkout';
-            } else if (hash.startsWith('why-choose-us-section') || hash.startsWith('heritage-section') || hash.startsWith('bestsellers-section')) {
-                 targetPageId = 'page-home';
-            } else {
-                targetPageId = 'page-home'; // Fallback
+            // 2. Default to 'home' if empty
+            if (!hash) hash = 'home';
+
+            // 3. Define the Mapping: Hash -> Page ID
+            let targetPageId = 'page-home'; // Default
+            
+            if (hash === 'shop') targetPageId = 'page-shop';
+            if (hash === 'checkout') targetPageId = 'page-checkout';
+            if (hash === 'home') targetPageId = 'page-home';
+            
+            // Special Case: Anchors inside the home page
+            if (hash === 'why-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
+                targetPageId = 'page-home'; // Always show home page for internal anchors
             }
 
-            // Step 1: Toggle visibility of the main pages
+            // 4. Hide All Pages & Show Target
             document.querySelectorAll('.page').forEach(p => {
-                const isActive = p.id === targetPageId;
-                if (isActive) {
-                    p.style.display = 'block';
-                    p.classList.add('active');
-                    // Render shop products only when activating the shop page
-                    if (targetPageId === 'page-shop') {
-                        renderShopProducts('All');
-                    }
-                } else {
-                    p.classList.remove('active');
-                    p.style.display = 'none';
-                }
+                p.style.display = 'none';
+                p.classList.remove('active');
             });
 
-            // Step 2: Handle internal scrolling (only when hash matches an internal anchor)
-            if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
-                const element = document.getElementById(hash);
-                if (element) {
-                    // Use standard scrollIntoView now that the page is visible
-                    element.scrollIntoView({ behavior: 'smooth' });
+            const targetPage = document.getElementById(targetPageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                targetPage.classList.add('active');
+                
+                // If Shop, render products immediately to prevent "lag"/empty state
+                if (targetPageId === 'page-shop') {
+                    // Slight timeout ensures DOM is ready before rendering heavy grid
+                    setTimeout(() => renderShopProducts('All'), 10);
+                }
+                
+                // If anchored section, scroll to it smoothly after page is visible
+                if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
+                    setTimeout(() => {
+                        const section = document.getElementById(hash);
+                        if (section) {
+                            // Only scroll if the hash targets an internal anchor ID
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 100);
+                } else if (targetPageId !== 'page-home') {
+                    // For switching between main pages (shop/checkout), reset scroll to top
+                    window.scrollTo(0, 0);
                 }
             }
             
@@ -868,8 +870,8 @@
         }
 
         function renderBestsellers() {
-            // Select specific IDs for Community Favorites (ensure they exist after update)
-            const bestsellerIds = ["p1", "p2", "p3", "p5", "p16", "p17"];
+            // Select specific IDs for Community Favorites (Restored all previous bestsellers)
+            const bestsellerIds = ["p1", "p2", "p3", "p5", "p7", "p16", "p20"];
             const bestsellers = products.filter(p => bestsellerIds.includes(p.id) && p.isBestseller); // Filter to only show relevant bestsellers
             
             const wrapper = document.getElementById('bestseller-wrapper');
@@ -941,47 +943,56 @@
             renderShopProducts(cat);
         }
 
-        // --- CORE NAVIGATION FUNCTIONS ---
-        
-        // Central function to control which page is visible based on the URL hash
+        // --- CORE NAVIGATION LOGIC (FIXED) ---
+
         function handleHashChange() {
-            const hash = window.location.hash.replace('#', '');
+            // 1. Get the pure hash (e.g., "shop", "checkout", "why-us-section")
+            let hash = window.location.hash.replace('#', '');
             
-            // Map the hash to the correct page ID
-            let targetPageId;
-            // FIX: Directly map hash to HTML IDs
-            if (hash === '' || hash === 'home') {
-                targetPageId = 'page-home';
-            } else if (hash === 'shop') {
-                targetPageId = 'page-shop';
-            } else if (hash === 'checkout') {
-                targetPageId = 'page-checkout';
-            } else {
-                targetPageId = 'page-home'; // Fallback
+            // 2. Default to 'home' if empty
+            if (!hash) hash = 'home';
+
+            // 3. Define the Mapping: Hash -> Page ID
+            let targetPageId = 'page-home'; // Default
+            
+            if (hash === 'shop') targetPageId = 'page-shop';
+            if (hash === 'checkout') targetPageId = 'page-checkout';
+            if (hash === 'home') targetPageId = 'page-home';
+            
+            // Special Case: Anchors inside the home page
+            if (hash === 'why-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
+                targetPageId = 'page-home'; // Always show home page for internal anchors
             }
 
-            // Step 1: Toggle visibility of the main pages
+            // 4. Hide All Pages & Show Target
             document.querySelectorAll('.page').forEach(p => {
-                const isActive = p.id === targetPageId;
-                if (isActive) {
-                    p.style.display = 'block';
-                    p.classList.add('active');
-                    // Render shop products only when activating the shop page
-                    if (targetPageId === 'page-shop') {
-                        renderShopProducts('All');
-                    }
-                } else {
-                    p.classList.remove('active');
-                    p.style.display = 'none';
-                }
+                p.style.display = 'none';
+                p.classList.remove('active');
             });
 
-            // Step 2: Handle internal scrolling (only on the home page)
-            if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
-                const element = document.getElementById(hash);
-                if (element) {
-                    // Use standard scrollIntoView now that the page is visible
-                    element.scrollIntoView({ behavior: 'smooth' });
+            const targetPage = document.getElementById(targetPageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                targetPage.classList.add('active');
+                
+                // If Shop, render products immediately to prevent "lag"/empty state
+                if (targetPageId === 'page-shop') {
+                    // Slight timeout ensures DOM is ready before rendering heavy grid
+                    setTimeout(() => renderShopProducts('All'), 10);
+                }
+                
+                // If anchored section, scroll to it smoothly after page is visible
+                if (targetPageId === 'page-home' && hash !== 'home') {
+                    setTimeout(() => {
+                        const section = document.getElementById(hash);
+                        if (section) {
+                            // Only scroll if the hash targets an internal anchor ID
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 100);
+                } else if (targetPageId !== 'page-home') {
+                    // For switching between main pages (shop/checkout), reset scroll to top
+                    window.scrollTo(0, 0);
                 }
             }
             
@@ -1000,18 +1011,6 @@
             window.location.hash = `#${id}`;
         }
         
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initial render based on URL
-            handleHashChange();
-            // Listener to handle back/forward buttons and anchor clicks
-            window.addEventListener('hashchange', handleHashChange);
-            
-            renderBestsellers();
-            updateCartUI();
-            
-            lucide.createIcons();
-        });
-
         // --- CART LOGIC ---
 
         function addToCart(compositeId, qty, baseId) {
