@@ -137,7 +137,7 @@
                     <!-- UPDATED: Navigation link HREFS to use hashes -->
                     <a href="#home" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Home</a>
                     <a href="#shop" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Shop All</a>
-                    <a href="#why-us-section" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Why Us</a>
+                    <button onclick="scrollToSection('why-choose-us-section')" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Why Us</button>
                 </nav>
 
                 <div class="flex items-center gap-4">
@@ -162,7 +162,7 @@
                     <!-- Background image/gradient applied via inline style for correct layering -->
                     <div class="absolute inset-0 z-10" 
                         style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), 
-                                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDEwfHx3aGVhdCUyMGZpZwelJTIwc3Vuc2V0fGVufDB8fHx8MTcwODY5MjYxN3ww&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;">
+                                url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDEwfHx3aGVhdCUyMGZpZWelJTIwc3Vuc2V0fGVufDB8fHx8MTcwODY5MjYxN3ww&ixlib=rb-4.0.3&q=80&w=1920') no-repeat center center/cover;">
                     </div>
                 </div>
 
@@ -575,7 +575,6 @@
                 benefits: ["Raw, virgin, and woodpressed to retain MCTs for instant energy", "Excellent edible oil and natural moisturizer for skin", "Supports metabolism and healthy weight management"],
                 isBestseller: true // Restoring best-seller status
             },
-            // Pure Badam Oil (Keeping as is, as it's not in the update list but already uses charm pricing)
             { id: "p5", name: "Pure Badam Oil", price: 349, unit: "100ml", category: "Oils", img1: "https://i.ibb.co/7ttstkt7/almond-oil.jpg", benefits: ["Extracted from Gurbandi almonds for max Vitamin E", "Deeply nourishes skin, reducing dark circles and fine lines", "Perfect for baby massage to strengthen bones"] },
             
             // Groundnut oil: ₹400 -> ₹399 for 1 litre (Image updated)
@@ -670,8 +669,7 @@
         });
 
         // --- CORE NAVIGATION FUNCTIONS (FIXED HASH ROUTING) ---
-        
-        // Central function to control which page is visible based on the URL hash
+
         function handleHashChange() {
             // 1. Get the pure hash (e.g., "shop", "checkout", "why-us-section")
             let hash = window.location.hash.replace('#', '');
@@ -687,7 +685,7 @@
             if (hash === 'home') targetPageId = 'page-home';
             
             // Special Case: Anchors inside the home page
-            if (hash === 'why-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
+            if (hash === 'why-choose-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
                 targetPageId = 'page-home'; // Always show home page for internal anchors
             }
 
@@ -778,9 +776,9 @@
                 if (inCart > 0) {
                     footerHtml = `
                         <div class="flex items-center justify-between bg-punjab-cream rounded-xl p-1 mt-2" onclick="event.stopPropagation()">
-                            <button onclick="updateItemQty('${currentCompositeId}', -1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg" aria-label="Decrease quantity">-</button>
+                            <button onclick="updateItemQty('${currentCompositeId}', -1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg">-</button>
                             <span class="font-bold text-punjab-dark text-lg">${inCart}</span>
-                            <button onclick="updateItemQty('${currentCompositeId}', 1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg" aria-label="Increase quantity">+</button>
+                            <button onclick="updateItemQty('${currentCompositeId}', 1)" class="w-10 h-10 flex items-center justify-center text-punjab-dark hover:bg-white rounded-lg transition-all font-bold text-lg">+</button>
                         </div>
                     `;
                 } else {
@@ -943,7 +941,7 @@
             renderShopProducts(cat);
         }
 
-        // --- CORE NAVIGATION LOGIC (FIXED) ---
+        // --- CORE NAVIGATION LOGIC (FIXED HASH ROUTING) ---
 
         function handleHashChange() {
             // 1. Get the pure hash (e.g., "shop", "checkout", "why-us-section")
@@ -960,7 +958,7 @@
             if (hash === 'home') targetPageId = 'page-home';
             
             // Special Case: Anchors inside the home page
-            if (hash === 'why-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
+            if (hash === 'why-choose-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
                 targetPageId = 'page-home'; // Always show home page for internal anchors
             }
 
@@ -982,7 +980,7 @@
                 }
                 
                 // If anchored section, scroll to it smoothly after page is visible
-                if (targetPageId === 'page-home' && hash !== 'home') {
+                if (targetPageId === 'page-home' && hash !== 'home' && hash !== '') {
                     setTimeout(() => {
                         const section = document.getElementById(hash);
                         if (section) {
@@ -1194,8 +1192,10 @@
                 showToast("Your Harvest Box is empty!");
                 return;
             }
+            // FIX: Hide cart before navigating to checkout hash
+            toggleCart(); 
             // Navigate to checkout page by setting hash
-            window.location.hash = '#page-checkout';
+            window.location.hash = '#checkout'; // FIXED: use simple hash #checkout
         }
 
         function finalizeOrder() { 
