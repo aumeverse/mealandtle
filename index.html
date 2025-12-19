@@ -327,6 +327,7 @@
                     <div class="text-center mb-12">
                         <!-- Animation and custom gradient class for shine effect -->
                         <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4 animated-header animate-header-pan-slow">The Punjab Pantry</h1>
+                        <!-- UPDATED PRODUCT COUNT -->
                         <p class="text-gray-500">20 Heritage premium organic Products • 100% Traceable</p>
                     </div>
 
@@ -1059,11 +1060,11 @@
             }
 
             const options = {
-                "key": "rzp_live_RsaIAX1aE8VMMbgOXLzcDihAjn",
+                "key": "rzp_live_RslEK4PcZ1MWch",
                 "amount": totalAmount * 100, // Amount in paise
                 "currency": "INR",
                 "name": "Nirog Organic",
-                "description": "Organic Products Order",
+                "description": "Order Payment",
                 "prefill": {
                     "name": fname + " " + lname,
                     "contact": phone
@@ -1094,15 +1095,16 @@
                 }
             };
 
-            const rzp = new Razorpay(options);
+            const rzp1 = new Razorpay(options);
             
             // Handle payment failure
-            rzp.on('payment.failed', function (response) {
+            rzp1.on('payment.failed', function (response) {
+                alert('Payment failed. Try again.');
                 console.error('Payment Failed:', response.error);
                 showToast('Payment failed: ' + response.error.description);
             });
             
-            rzp.open();
+            rzp1.open();
         }
 
         // --- INITIALIZATION ---
