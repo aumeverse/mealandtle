@@ -76,6 +76,9 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     
+    <!-- Razorpay Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
@@ -108,12 +111,12 @@
             color: transparent;
         }
         
-        /* FIX: Ensure active filter text is legible against green background */
+        /* Ensure active filter text is legible against green background */
         .filter-btn.active {
             color: white !important; /* Forces white text on the active green button */
         }
 
-        /* FIX: Pointer cursor for the whole card */
+        /* Pointer cursor for the whole card */
         .product-card-wrapper {
             cursor: pointer;
         }
@@ -129,13 +132,13 @@
                 <a href="#home" class="flex items-center gap-3 group">
                     <i data-lucide="sprout" class="w-10 h-10 text-punjab-gold group-hover:scale-110 transition-transform drop-shadow-md"></i>
                     <div class="flex flex-col">
-                        <!-- UPDATED: Brand name text color to punjab-soil (black) -->
+                        <!-- Brand name text color to punjab-soil (black) -->
                         <span class="font-serif font-bold text-lg sm:text-xl leading-none text-punjab-soil drop-shadow-md header-text">Nirog Organic</span>
                     </div>
                 </a>
 
                 <nav class="hidden md:flex items-center space-x-8">
-                    <!-- UPDATED: Navigation link HREFS to use hashes -->
+                    <!-- Navigation link HREFS to use hashes -->
                     <a href="#home" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Home</a>
                     <a href="#shop" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Shop All</a>
                     <button onclick="scrollToSection('why-choose-us-section')" class="text-punjab-soil hover:text-punjab-gold font-medium text-sm tracking-wide uppercase transition-colors header-text">Why Us</button>
@@ -175,7 +178,7 @@
                     <p class="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
                         Slow stone-ground flours and woodpressed oils. <br>With 30 years of expertise in the grain business and deep roots in Punjab.
                     </p>
-                    <!-- UPDATED BUTTON to use hash routing -->
+                    <!-- BUTTON to use hash routing -->
                     <a href="#shop" class="inline-flex px-10 py-4 bg-punjab-gold hover:bg-punjab text-punjab-soil rounded-full font-bold shadow-lg shadow-punjab-gold/40 transition-all hover:scale-105 items-center justify-center gap-2 mx-auto">
                         View The Pantry
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -224,7 +227,6 @@
                         </div>
                     </div>
                     
-                    <!-- Full Width Swiper -->
                     <div class="swiper bestseller-swiper !pb-12 !px-4">
                         <div class="swiper-wrapper" id="bestseller-wrapper">
                             <!-- Cards Injected JS -->
@@ -248,7 +250,6 @@
                         <!-- Trust Badge: Stone-Ground Fresh -->
                         <div class="bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl text-center hover:bg-white/20 transition-all hover:-translate-y-2 duration-300 group">
                             <div class="w-16 h-16 mx-auto mb-6 bg-punjab-gold/20 rounded-full flex items-center justify-center text-white group-hover:bg-punjab-gold transition-colors">
-                                <!-- Replaced generic SVG with Lucide icon equivalent for simplicity and consistency -->
                                 <i data-lucide="aperture" class="w-8 h-8"></i> 
                             </div>
                             <h3 class="font-serif text-xl font-bold mb-3">Stone-Ground Freshness</h3>
@@ -324,9 +325,8 @@
             <div class="pt-32 pb-24 bg-punjab-cream min-h-screen">
                 <div class="container mx-auto px-4 sm:px-6">
                     <div class="text-center mb-12">
-                        <!-- ADDED: Animation and custom gradient class for shine effect -->
+                        <!-- Animation and custom gradient class for shine effect -->
                         <h1 class="font-serif text-4xl sm:text-5xl font-bold mb-4 animated-header animate-header-pan-slow">The Punjab Pantry</h1>
-                        <!-- UPDATED PRODUCT COUNT -->
                         <p class="text-gray-500">20 Heritage premium organic Products • 100% Traceable</p>
                     </div>
 
@@ -348,7 +348,7 @@
 
                     <!-- Product Grid - Optimized for Mobile (2 cols) -->
                     <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-8">
-                        <!-- All Products Injected Here -->
+                        <!-- All Products with Mini Swipers injected here -->
                     </div>
                 </div>
             </div>
@@ -363,7 +363,7 @@
                         <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i> Back to Shop
                     </a>
                     <h1 class="font-serif text-3xl md:text-4xl font-bold text-punjab-soil">Secure Checkout</h1>
-                    <p class="text-gray-500 mt-2">Complete your details to confirm your order via WhatsApp.</p>
+                    <p class="text-gray-500 mt-2">Complete your details to confirm your order.</p>
                 </div>
 
                 <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-200">
@@ -382,7 +382,7 @@
                                 <input type="text" id="lname" required class="w-full p-3 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:border-punjab focus:ring-1 focus:ring-punjab transition-all">
                             </div>
                             <div class="space-y-1 md:col-span-2">
-                                <label class="text-xs font-bold uppercase text-gray-500">Phone Number (WhatsApp)</label>
+                                <label class="text-xs font-bold uppercase text-gray-500">Phone Number</label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-3.5 text-gray-500">+91</span>
                                     <input type="tel" id="phone" required pattern="[0-9]{10}" class="w-full p-3 pl-12 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:border-punjab focus:ring-1 focus:ring-punjab transition-all">
@@ -432,12 +432,12 @@
                                 <span class="font-bold text-lg text-gray-800">Total to Pay</span>
                                 <span id="checkout-total" class="font-bold text-2xl text-punjab-dark">₹0</span>
                             </div>
-                            <p class="text-xs text-center text-gray-500 mt-2 italic">Minimal shipping charges would be applied during final payment on WhatsApp after confirming order details.</p>
+                            <p class="text-xs text-center text-gray-500 mt-2 italic">Minimal shipping charges would be applied during final payment after confirming order details.</p>
                         </div>
 
                         <!-- Submit -->
                         <button type="submit" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-lg shadow-green-600/30 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02]">
-                            Confirm Order via WhatsApp <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            Proceed to Secure Payment <i data-lucide="credit-card" class="w-5 h-5"></i>
                         </button>
                     </form>
                 </div>
@@ -530,7 +530,7 @@
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6 bg-white/30"></div>
         <div class="p-6 bg-punjab-cream border-t border-gray-200 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
             <div class="flex justify-between items-center mb-4"><span class="text-gray-600">Subtotal</span><span id="cart-total" class="font-bold text-2xl text-punjab-dark">₹0</span></div>
-            <p class="text-xs text-center text-gray-500 mb-4 italic">Minimal shipping charges would be applied during final payment on WhatsApp after confirming order details.</p> 
+            <p class="text-xs text-center text-gray-500 mb-4 italic">Minimal shipping charges would be applied during final payment after confirming order details.</p> 
             <button onclick="proceedToCheckout()" class="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02]">
                 Proceed to Checkout <i data-lucide="arrow-right" class="w-5 h-5"></i>
             </button>
@@ -545,103 +545,35 @@
 
     <!-- JS LOGIC (Optimized for performance) -->
     <script>
-        // --- UPDATED PRODUCT DATA ---
+        // --- PRODUCT DATA ---
         const products = [
-            // Black mustard oil: ₹350 -> ₹349 for 1 litre
-            { 
-                id: "p1", name: "Pure Black Mustard Oil", price: 349, unit: "1L", category: "Oils", 
-                img1: "https://i.ibb.co/39HK9h3x/mustrd.jpg", 
-                benefits: ["Woodpressed in wooden Kolhu to preserve heat-sensitive antioxidants", "High pungency: A sign of purity and active enzymes", "Rich in Omega-3 & 6 for heart health and cholesterol balance"],
-                isBestseller: true, discount: 10 
-            },
-            // Yellow mustard oil: ₹499
-            { 
-                id: "p2", name: "Pure Yellow Mustard Oil", price: 499, unit: "1L", category: "Oils", 
-                img1: "https://i.ibb.co/LzVxBmwj/yello-sarso.jpg", 
-                benefits: ["Extracted from golden sarso seeds for a milder, aromatic taste", "High Vitamin E content promotes glowing skin and hair", "Ideal for pickles (achaar) and light sautéing"],
-                isBestseller: true, discount: 15
-            },
-            // Coconut oil: ₹900 -> ₹899 for 1 litre, ₹450 -> ₹449 for 500 ml, ₹100 -> ₹99 for 100 ml
-            { 
-                id: "p3", name: "Pure Coconut Oil", price: 899, unit: "1L", category: "Oils", 
-                img1: "https://i.ibb.co/JRkP18SM/cocnut.jpg", 
-                variants: [ {u: "100ml", p: 99}, {u: "500ml", p: 449}, {u: "1L", p: 899} ],
-                benefits: ["Raw, virgin, and woodpressed to retain MCTs for instant energy", "Excellent edible oil and natural moisturizer for skin", "Supports metabolism and healthy weight management"],
-                isBestseller: true // Restoring best-seller status
-            },
-            { id: "p5", name: "Pure Badam Oil", price: 349, unit: "100ml", category: "Oils", img1: "https://i.ibb.co/7ttstkt7/almond-oil.jpg", benefits: ["Extracted from Gurbandi almonds for max Vitamin E", "Deeply nourishes skin, reducing dark circles and fine lines", "Perfect for baby massage to strengthen bones"] },
-            
-            // Groundnut oil: ₹400 -> ₹399 for 1 litre (Image updated)
-            { 
-                id: "p22", name: "Pure Groundnut Oil", price: 399, unit: "1L", category: "Oils", 
-                img1: "https://i.ibb.co/jZWyRnJK/mumfali.jpg", // UPDATED IMAGE
-                benefits: ["Woodpressed for maximum flavor and nutrition", "High smoking point suitable for deep frying", "Rich in Monounsaturated fats (MUFA) for heart health"],
-            },
-            
-            // White sesame oil: ₹350 -> ₹349 for 500 ml. 1L base price adjusted accordingly.
-            { 
-                id: "p20", name: "Sesame Oil", price: 699, unit: "1L", category: "Oils", 
-                img1: "https://i.ibb.co/3Y1CL7m7/ssesameoil.jpg",
-                variants: [ {u: "500ml", p: 349}, {u: "1L", p: 699} ],
-                benefits: ["Woodpressed below 40°C, preserving maximum antioxidants and natural flavor", "Rich in copper and calcium, supporting bone and joint health", "Anti-inflammatory properties aid in managing chronic pain"],
-                isBestseller: true, discount: 12
-            },
-            
-            // Jaggery: ₹199 (No change needed)
-            { 
-                id: "p21", name: "Jaggery", price: 199, unit: "1kg", category: "Sweeteners", 
-                img1: "https://i.ibb.co/jPZZ5XMr/jaggery.jpg",
-                benefits: ["Unrefined cane sugar, rich in minerals like iron, magnesium, and potassium", "Excellent natural blood purifier and immune booster", "Acts as a digestive agent, highly recommended after meals"],
-                discount: 17
-            },
-            
-            // Organic wheat flour: ₹700 -> ₹699 for 10 kg. 1kg variant adjusted.
-            { 
-                id: "p6", name: "Wheat Atta", price: 69, unit: "1kg", category: "Flours", 
-                img1: "https://i.ibb.co/tTGzfGZt/wheat.jpg", 
-                variants: [ {u: "1kg", p: 69}, {u: "5kg", p: 349}, {u: "10kg", p: 699} ], 
-                benefits: ["Slow stone-ground at 150 RPM to keep flour cool and nutrient-rich", "Contains 100% bran and germ for digestive health", "Makes soft, sweet rotis that stay fresh longer"] 
-            },
-            // MP wheat flour: ₹550 -> ₹549 for 10 kg. 1kg variant adjusted.
-            { 
-                id: "p7", name: "MP Wheat Atta", price: 54, unit: "1kg", category: "Flours", 
-                img1: "https://i.ibb.co/7d6YFFJH/mp.jpg", 
-                variants: [ {u: "1kg", p: 54}, {u: "5kg", p: 274}, {u: "10kg", p: 549} ], 
-                benefits: ["Sourced from MP's Malwa region, known for premium golden grains", "Higher protein content (13%) for better muscle repair", "Absorbs more water, resulting in fluffier, tastier rotis"],
-                isBestseller: true, discount: 10
-            },
-            // Multigrain atta: ₹120 -> ₹119 per kg
-            { id: "p8", name: "Multigrain Atta", price: 119, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/MDNxgs00/multi.jpg", benefits: ["A powerful blend of 7 heritage grains: Wheat, Ragi, Bajra, Jowar, etc.", "Low GI (55) helps manage blood sugar and insulin levels", "50% more fiber than regular atta for superior gut health"] },
-            // Ragi atta: ₹150 -> ₹149 per kg
-            { id: "p9", name: "Ragi Atta", price: 149, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/d023GfJz/63bb1e96-ea50-432b-93ff-da15e5d7623a.png", img2: "https://i.ibb.co/4R7kQj06/ragi-millet-seed-500x500.webp", benefits: ["The ultimate Calcium king (344mg/100g) for bone density", "Excellent for growing kids and seniors", "Helps in weight loss by keeping you full for longer"] },
-            // Jowar atta: ₹130 -> ₹129 per kg
-            { id: "p10", name: "Jowar Atta", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/RT8Xxvkj/83375485-4b49-41c8-be9f-561b99436307.png", img2: "https://i.ibb.co/5gs5J1hM/610-IDm9a-C5-L-SL1200.jpg", benefits: ["Naturally gluten-free and easy to digest", "High in complex carbs for sustained energy without the crash", "Cooling nature makes it perfect for summer diets"] },
-            // Jau atta: ₹130 -> ₹129 per kg
-            { id: "p11", name: "Jau Atta (Barley)", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/KxczQb98/166355b5-a465-406f-9781-025c57e5b4f1.png", img2: "https://i.ibb.co/ds4DfSrb/Barley.jpg", benefits: ["Ancient cooling grain", "Rich in Beta-glucan fiber", "Excellent for kidney health and flushing out toxins"] },
-            // Besan: ₹160 -> ₹159 per kg (500g variant adjusted)
+            { id: "p1", name: "Pure Black Mustard Oil", price: 349, unit: "1L", category: "Oils", img1: "https://i.ibb.co/39HK9h3x/mustrd.jpg", benefits: ["Woodpressed in wooden Kolhu", "High pungency & active enzymes", "Rich in Omega-3 & 6"], isBestseller: true, discount: 10 },
+            { id: "p2", name: "Pure Yellow Mustard Oil", price: 499, unit: "1L", category: "Oils", img1: "https://i.ibb.co/LzVxBmwj/yello-sarso.jpg", benefits: ["Extracted from golden sarso seeds", "High Vitamin E content", "Ideal for pickles and light sautéing"], isBestseller: true, discount: 15 },
+            { id: "p3", name: "Pure Coconut Oil", price: 899, unit: "1L", category: "Oils", img1: "https://i.ibb.co/JRkP18SM/cocnut.jpg", variants: [ {u: "100ml", p: 99}, {u: "500ml", p: 449}, {u: "1L", p: 899} ], benefits: ["Raw, virgin, and woodpressed", "Excellent edible & skin moisturizer", "Supports metabolism"], isBestseller: true },
+            { id: "p5", name: "Pure Badam Oil", price: 349, unit: "100ml", category: "Oils", img1: "https://i.ibb.co/7ttstkt7/almond-oil.jpg", benefits: ["Extracted from Gurbandi almonds", "Deeply nourishes skin", "Perfect for baby massage"] },
+            { id: "p22", name: "Pure Groundnut Oil", price: 399, unit: "1L", category: "Oils", img1: "https://i.ibb.co/jZWyRnJK/mumfali.jpg", benefits: ["Woodpressed for maximum nutrition", "High smoking point", "Rich in Monounsaturated fats"] },
+            { id: "p20", name: "Sesame Oil", price: 699, unit: "1L", category: "Oils", img1: "https://i.ibb.co/3Y1CL7m7/ssesameoil.jpg", variants: [ {u: "500ml", p: 349}, {u: "1L", p: 699} ], benefits: ["Woodpressed below 40°C", "Rich in copper and calcium", "Anti-inflammatory properties"], isBestseller: true, discount: 12 },
+            { id: "p21", name: "Jaggery", price: 199, unit: "1kg", category: "Sweeteners", img1: "https://i.ibb.co/jPZZ5XMr/jaggery.jpg", benefits: ["Unrefined cane sugar", "Excellent natural blood purifier", "Acts as a digestive agent"], discount: 17 },
+            { id: "p6", name: "Wheat Atta", price: 69, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/tTGzfGZt/wheat.jpg", variants: [ {u: "1kg", p: 69}, {u: "5kg", p: 349}, {u: "10kg", p: 699} ], benefits: ["Slow stone-ground at 150 RPM", "Contains 100% bran and germ", "Makes soft, sweet rotis"] },
+            { id: "p7", name: "MP Wheat Atta", price: 54, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/7d6YFFJH/mp.jpg", variants: [ {u: "1kg", p: 54}, {u: "5kg", p: 274}, {u: "10kg", p: 549} ], benefits: ["Sourced from MP's Malwa region", "Higher protein content (13%)", "Absorbs more water"], isBestseller: true, discount: 10 },
+            { id: "p8", name: "Multigrain Atta", price: 119, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/MDNxgs00/multi.jpg", benefits: ["Blend of 7 heritage grains", "Low GI (55) helps manage blood sugar", "50% more fiber"] },
+            { id: "p9", name: "Ragi Atta", price: 149, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/d023GfJz/63bb1e96-ea50-432b-93ff-da15e5d7623a.png", img2: "https://i.ibb.co/4R7kQj06/ragi-millet-seed-500x500.webp", benefits: ["Calcium king (344mg/100g)", "Excellent for growing kids", "Helps in weight loss"] },
+            { id: "p10", name: "Jowar Atta", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/RT8Xxvkj/83375485-4b49-41c8-be9f-561b99436307.png", img2: "https://i.ibb.co/5gs5J1hM/610-IDm9a-C5-L-SL1200.jpg", benefits: ["Naturally gluten-free", "High in complex carbs", "Cooling nature"] },
+            { id: "p11", name: "Jau Atta (Barley)", price: 129, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/KxczQb98/166355b5-a465-406f-9781-025c57e5b4f1.png", img2: "https://i.ibb.co/ds4DfSrb/Barley.jpg", benefits: ["Ancient cooling grain", "Rich in Beta-glucan fiber", "Excellent for kidney health"] },
             { id: "p12", name: "Besan (Chickpea)", price: 159, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/twHt1WcL/cd7e094a-34b2-4339-91eb-c4446f31529c.png", img2: "https://i.ibb.co/JjKPQPjM/besan-gram-flour-or-chickpea-flour-is-a-powder-made-from-ground-chickpea-known-as-bengal-gram-free-p.jpg", variants: [ {u: "500g", p: 79}, {u: "1kg", p: 159} ], benefits: ["Made from 100% Chana Dal", "Protein-packed (20g/100g)", "Great vegan egg substitute"] },
-            // Dalia: ₹60 -> ₹59 for 500 gram (1kg variant adjusted)
             { id: "p13", name: "Dalia", price: 119, unit: "1kg", category: "Grains", img1: "https://i.ibb.co/tM976W1b/aa227679-7f64-4580-b9a0-c3661c2b3bec.png", variants: [ {u: "500g", p: 59}, {u: "1kg", p: 119} ], benefits: ["Whole broken wheat", "High fiber content (12g/100g)", "Best for digestion"] },
-            // Haldi: ₹100 -> ₹99 for 250 gram
             { id: "p15", name: "Haldi (Turmeric)", price: 99, unit: "250g", category: "Spices", img1: "https://i.ibb.co/ym6yQGtL/haldi.jpg", benefits: ["High Curcumin content (7%)", "Potent anti-inflammatory", "Essential for Golden Milk"] },
-            // Black wheat flour: ₹130 -> ₹129 per kg
-            { 
-                id: "p16", name: "Black Wheat Flour", price: 129, unit: "1kg", category: "Heritage Flours", 
-                img1: "https://i.ibb.co/QvZ5tvcf/black-wheat-flour.jpg", img2: "https://i.ibb.co/N8WfCVp/organic-black-wheat-1713514180-7390923.jpg", 
-                benefits: ["Rich in Anthocyanins", "Low Glycemic Index (45)", "Contains 40% more protein"],
-                isBestseller: true, discount: 15
-            },
-            // Paigambri wheat flour: ₹179 per kg
+            { id: "p16", name: "Black Wheat Flour", price: 129, unit: "1kg", category: "Heritage Flours", img1: "https://i.ibb.co/QvZ5tvcf/black-wheat-flour.jpg", img2: "https://i.ibb.co/N8WfCVp/organic-black-wheat-1713514180-7390923.jpg", benefits: ["Rich in Anthocyanins", "Low Glycemic Index (45)", "Contains 40% more protein"], isBestseller: true, discount: 15 },
             { id: "p17", name: "Paigambari Wheat", price: 179, unit: "1kg", category: "Heritage Flours", img1: "https://i.ibb.co/Zp8qVrdY/paigambar-wheat-flour.jpg", img2: "https://i.ibb.co/TM561N6D/p-wheat.webp", benefits: ["4500-year-old heirloom strain", "267% more minerals", "Low gluten structure"] },
-            // Bansi wheat flour: ₹150 -> ₹149 per kg
             { id: "p18", name: "Bansi Wheat Flour", price: 149, unit: "1kg", category: "Heritage Flours", img1: "https://i.ibb.co/9m4scDfQ/bansi.jpg", img2: "https://i.ibb.co/xKn3wgDL/bansi2.jpg", benefits: ["Ancient variety", "Very low Glycemic Index (50)", "Distinct rich taste"] },
-            // Makki atta: ₹89 per kg (PRICE CHANGE)
             { id: "p19", name: "Maize Flour (Makki Atta)", price: 89, unit: "1kg", category: "Flours", img1: "https://i.ibb.co/pspPmBs/maize.jpg", benefits: ["Rich in Zinc, Iron and Vitamin A", "Gluten-free winter staple", "High fiber content"] }
         ];
 
         let cart = JSON.parse(localStorage.getItem('nirogCart')) || {}; 
         let currentModalQty = 1;
         let currentMainPage = 'page-home';
+
+        // --- CORE UTILITY FUNCTIONS ---
 
         function getProductDetails(compositeId) {
             const [pid, variantUnit] = compositeId.split('_');
@@ -654,77 +586,65 @@
             return { ...product, id: compositeId, baseId: pid };
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            handleHashChange();
-            window.addEventListener('hashchange', handleHashChange);
-            renderBestsellers();
-            updateCartUI();
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'flex items-center gap-3 bg-punjab text-white p-4 mb-3 rounded-xl shadow-lg border border-punjab-light animate-toast-in';
+            toast.innerHTML = `<i data-lucide="check-circle" class="w-6 h-6 shrink-0"></i><span class="font-medium text-sm">${message}</span>`;
+            container.appendChild(toast);
             lucide.createIcons();
-        });
-
-        // --- LAYERED NAVIGATION ---
-        function handleHashChange() {
-            let hash = window.location.hash.replace('#', '');
-            if (!hash) hash = 'home';
-
-            const isOverlay = (hash === 'cart' || hash === 'product-view');
-
-            if (isOverlay) {
-                // Show Overlay, Keep Main Page
-                if (hash === 'cart') openCartOverlay();
-                // Note: 'product-view' is handled via openModal, but if user refreshes on #product-view, we might want to close it or default to shop. For simplicity, we just won't hide the main page.
-            } else {
-                // Close Overlays
-                closeCartOverlay();
-                closeModal(false); // don't go back history here
-
-                // 2. Determine Target Main Page
-                let targetPageId = 'page-home';
-                if (hash === 'shop') targetPageId = 'page-shop';
-                if (hash === 'checkout') targetPageId = 'page-checkout';
-                
-                if (hash === 'why-choose-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
-                    targetPageId = 'page-home';
-                }
-
-                currentMainPage = targetPageId;
-
-                // 3. Switch Main Page
-                document.querySelectorAll('.page').forEach(p => {
-                    if (p.id === targetPageId) {
-                        p.style.display = 'block';
-                        p.classList.add('active');
-                        if (targetPageId === 'page-shop') renderShopProducts('All');
-                    } else {
-                        p.classList.remove('active');
-                        p.style.display = 'none';
-                    }
-                });
-
-                // 4. Handle Scroll Anchors
-                if (targetPageId === 'page-home' && hash !== 'home') {
-                    setTimeout(() => {
-                        const section = document.getElementById(hash);
-                        if (section) section.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                } else if (targetPageId !== 'page-home') {
-                    window.scrollTo(0, 0);
-                }
-            }
-            lucide.createIcons();
+            setTimeout(() => {
+                toast.classList.remove('animate-toast-in');
+                toast.classList.add('animate-toast-out');
+                setTimeout(() => toast.remove(), 300);
+            }, 1500); 
         }
 
-        function scrollToSection(id) { window.location.hash = `#${id}`; }
+        function addToCart(compositeId, qty, baseId) {
+            cart[compositeId] = (cart[compositeId] || 0) + qty;
+            localStorage.setItem('nirogCart', JSON.stringify(cart));
+            updateCartUI();
+            showToast("Added to Cart!");
+            if (baseId) refreshCardButton(baseId);
+        }
 
-        // --- MODAL LOGIC ---
+        function updateItemQty(compId, n) {
+            if (cart[compId] + n <= 0) delete cart[compId];
+            else cart[compId] += n;
+            localStorage.setItem('nirogCart', JSON.stringify(cart));
+            updateCartUI();
+            const baseId = compId.split('_')[0];
+            refreshCardButton(baseId);
+        }
+
+        // --- MODAL RELATED LOGIC ---
+        
+        function updateModalVariant(select, product) {
+            const variant = product.variants.find(v => v.u === select.value);
+            document.getElementById('modal-price').innerText = `₹${variant.p}`;
+        }
+
+        function closeModal(doBack = true) { 
+            document.getElementById('product-modal').classList.add('hidden'); 
+            if (doBack && window.location.hash === '#product-view') history.back();
+        }
+        
+        function adjustModalQty(n) { 
+            const display = document.getElementById('modal-qty');
+            if (!display) return;
+            
+            currentModalQty = parseInt(display.innerText) + n;
+            if (currentModalQty < 1) currentModalQty = 1;
+
+            display.innerText = currentModalQty;
+        }
+
         function openModal(id) {
-            // Push history state so back button works
             if (window.location.hash !== '#product-view') {
                 history.pushState(null, null, '#product-view');
             }
 
             const p = products.find(x => x.id === id);
-            // Ensure fallback for images if missing (although fixed in array)
             const imgUrl = p.img1 || 'https://placehold.co/600x400/F0E6D8/854D0E?text=Product';
 
             const defaultUnit = p.variants ? p.variants[0].u : p.unit;
@@ -736,6 +656,7 @@
             document.getElementById('modal-desc').innerText = `Pure ${p.name}, sourced directly from heritage farmers.`;
             document.getElementById('modal-price').innerText = `₹${defaultPrice}`;
             document.getElementById('modal-unit').innerText = p.variants ? '' : `/ ${defaultUnit}`;
+            document.getElementById('modal-qty-container').innerHTML = ''; // Clear previous
             currentModalQty = 1; 
             
             const variantSelectorContainer = document.getElementById('modal-variant-selector');
@@ -755,20 +676,21 @@
 
             // Custom Quantity Logic for Modal
             const modalQtyContainer = document.getElementById('modal-qty-container');
-            // Hide custom quantity for Oils and Turmeric(p15)
+            // Check if product requires KG input (Flours/Grains/Sweeteners) or is Turmeric (p15)
             const isCustomQty = p.category !== 'Oils' && p.id !== 'p15';
 
             if (isCustomQty) {
                 // Show Custom Input with KG label
                 modalQtyContainer.innerHTML = `
-                <div class="flex items-center h-12 border border-gray-300 rounded-xl overflow-hidden">
-                    <input type="number" min="1" value="1" id="modal-custom-qty" class="w-20 h-full p-2 text-center text-gray-700 text-lg outline-none font-bold" onchange="currentModalQty = parseInt(this.value) || 1">
-                    <span class="bg-gray-100 px-4 h-full flex items-center text-sm font-bold text-gray-600 border-l border-gray-300">KG</span>
+                <div class="flex items-center justify-center gap-4">
+                    <span class="text-sm text-gray-500 font-bold uppercase">Weight:</span>
+                    <div class="flex items-center h-12 border border-gray-300 rounded-xl overflow-hidden">
+                        <input type="number" min="1" value="1" id="modal-custom-qty" class="w-20 h-full p-2 text-center text-gray-700 text-lg outline-none font-bold" onchange="currentModalQty = parseInt(this.value) || 1">
+                        <span class="bg-gray-100 px-4 h-full flex items-center text-sm font-bold text-gray-600 border-l border-gray-300">KG</span>
+                    </div>
                 </div>`;
             } else {
-                // Show Standard Stepper for items without custom quantity (Oils/Turmeric) or just simple add
-                // Actually for Oils we just add 1 unit at a time, or simple display.
-                // Let's use simple stepper for consistency but without KG label
+                 // Show Standard Stepper for Oils/Turmeric/products with variants
                  modalQtyContainer.innerHTML = `
                 <div class="flex items-center bg-white rounded-full px-4 py-2 border border-gray-200">
                     <button onclick="adjustModalQty(-1)" class="text-xl font-bold text-gray-500 hover:text-punjab px-2">-</button>
@@ -781,110 +703,84 @@
             
             document.getElementById('modal-add-btn').onclick = () => { 
                 let selectedUnit = p.unit;
-                // If variant selected, use that unit
                 if (p.variants) selectedUnit = document.getElementById('modal-variant-select').value;
                 
-                // If Custom Qty enabled, read from input
+                let qtyToAdd = currentModalQty; 
+                
                 if (isCustomQty) {
-                     const val = parseInt(document.getElementById('modal-custom-qty').value);
-                     if (val > 0) currentModalQty = val;
+                     const customInput = document.getElementById('modal-custom-qty');
+                     if (customInput) qtyToAdd = parseInt(customInput.value) || 1;
                 }
 
                 const compositeId = p.variants ? `${p.id}_${selectedUnit}` : p.id;
-                addToCart(compositeId, currentModalQty, p.id); 
+                addToCart(compositeId, qtyToAdd, p.id); 
                 history.back(); // Close modal
             };
             
             document.getElementById('product-modal').classList.remove('hidden');
             lucide.createIcons();
         }
-
-        function updateModalVariant(select, product) {
-            const variant = product.variants.find(v => v.u === select.value);
-            document.getElementById('modal-price').innerText = `₹${variant.p}`;
-        }
-
-        function closeModal(doBack = true) { 
-            document.getElementById('product-modal').classList.add('hidden'); 
-            if (doBack && window.location.hash === '#product-view') history.back();
-        }
         
-        function adjustModalQty(n) { 
-            if (currentModalQty + n > 0) {
-                currentModalQty += n;
-                // Only update text if stepper is present
-                const display = document.getElementById('modal-qty');
-                if (display) display.innerText = currentModalQty;
-            }
-        }
+        // --- CORE NAVIGATION FUNCTIONS ---
 
-        // --- CART LOGIC ---
-        function openCartOverlay() {
-            const sb = document.getElementById('cart-sidebar');
-            const ov = document.getElementById('cart-overlay');
-            sb.classList.remove('translate-x-full'); 
-            ov.classList.remove('hidden'); 
-            setTimeout(()=>ov.classList.remove('opacity-0'),10);
-            
-            if (window.location.hash !== '#cart') {
-                history.pushState(null, null, '#cart');
-            }
-        }
+        function handleHashChange() {
+            let hash = window.location.hash.replace('#', '');
+            if (!hash) hash = 'home';
 
-        function closeCartOverlay() {
-             const sb = document.getElementById('cart-sidebar');
-             const ov = document.getElementById('cart-overlay');
-             if (!sb.classList.contains('translate-x-full')) {
-                sb.classList.add('translate-x-full'); 
-                ov.classList.add('opacity-0'); 
-                setTimeout(()=>ov.classList.add('hidden'),300);
-             }
-        }
+            const isOverlay = (hash === 'cart' || hash === 'product-view');
 
-        function toggleCart() { 
-            const sb = document.getElementById('cart-sidebar');
-            if (sb.classList.contains('translate-x-full')) {
-                openCartOverlay();
+            if (isOverlay) {
+                if (hash === 'cart') openCartOverlay();
             } else {
-                history.back(); // Will trigger hashchange -> closeCartOverlay
+                closeCartOverlay();
+                closeModal(false); 
+
+                let targetPageId = 'page-home';
+                if (hash === 'shop') targetPageId = 'page-shop';
+                if (hash === 'checkout') targetPageId = 'page-checkout';
+                
+                if (hash === 'why-choose-us-section' || hash === 'heritage-section' || hash === 'bestsellers-section') {
+                    targetPageId = 'page-home';
+                }
+
+                currentMainPage = targetPageId;
+
+                document.querySelectorAll('.page').forEach(p => {
+                    if (p.id === targetPageId) {
+                        p.style.display = 'block';
+                        p.classList.add('active');
+                        if (targetPageId === 'page-shop') renderShopProducts('All');
+                    } else {
+                        p.classList.remove('active');
+                        p.style.display = 'none';
+                    }
+                });
+
+                if (targetPageId === 'page-home' && hash !== 'home') {
+                    setTimeout(() => {
+                        const section = document.getElementById(hash);
+                        if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                } else if (targetPageId !== 'page-home') {
+                    window.scrollTo(0, 0);
+                }
             }
-        }
-        
-        function addToCart(compositeId, qty, baseId) {
-            cart[compositeId] = (cart[compositeId] || 0) + qty;
-            localStorage.setItem('nirogCart', JSON.stringify(cart));
-            updateCartUI();
-            showToast("Added to Cart!");
-            if (baseId) refreshCardButton(baseId);
+            lucide.createIcons();
         }
 
-        function updateItemQty(compId, n) {
-            if (cart[compId] + n <= 0) delete cart[compId];
-            else cart[compId] += n;
-            localStorage.setItem('nirogCart', JSON.stringify(cart));
-            updateCartUI();
-            const baseId = compId.split('_')[0];
-            refreshCardButton(baseId);
+        function scrollToSection(id) { window.location.hash = `#${id}`; }
+        function showPage(pageId) {
+             const hashName = pageId === 'page-home' ? '' : `#${pageId.replace('page-', '')}`;
+             window.location.hash = hashName;
         }
-        
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'flex items-center gap-3 bg-punjab text-white p-4 mb-3 rounded-xl shadow-lg border border-punjab-light animate-toast-in';
-            toast.innerHTML = `<i data-lucide="check-circle" class="w-6 h-6 shrink-0"></i><span class="font-medium text-sm">${message}</span>`;
-            container.appendChild(toast);
-            lucide.createIcons();
-            setTimeout(() => {
-                toast.classList.remove('animate-toast-in');
-                toast.classList.add('animate-toast-out');
-                setTimeout(() => toast.remove(), 300);
-            }, 1500); 
-        }
+
+        // --- RENDERERS ---
 
         function createProductCard(p, type = 'shop', index = 0) {
             const swiperId = `swiper-${p.id}-${Math.random().toString(36).substr(2, 9)}`;
             let variantHtml = '', currentPrice = p.price, currentUnit = p.unit;
             let customQtyInput = '';
+            const isCustomQty = p.category !== 'Oils' && p.id !== 'p15';
 
             if (p.variants) {
                 currentPrice = p.variants[0].p;
@@ -893,7 +789,7 @@
             } 
             
             // Custom Quantity Input Logic
-            if (type === 'shop' && p.category !== 'Oils' && p.id !== 'p15') {
+            if (type === 'shop' && isCustomQty) {
                  customQtyInput = `
                  <div class="flex items-center justify-between mb-2 px-1" onclick="event.stopPropagation()">
                     <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Custom Qty:</span>
@@ -902,7 +798,28 @@
                         <span class="bg-gray-100 border border-gray-300 rounded-r px-1 h-full flex items-center text-[10px] text-gray-600 font-bold">KG</span>
                     </div>
                  </div>`;
+            } else if (type === 'shop' && p.category === 'Oils' && !p.variants) {
+                 // For non-variant oils (like Badam oil), keep simple QTY input
+                 customQtyInput = `
+                 <div class="flex items-center justify-between mb-2 px-1" onclick="event.stopPropagation()">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Quantity:</span>
+                    <div class="flex items-center h-8">
+                        <input type="number" min="1" value="1" id="qty-input-${p.id}" class="w-12 h-full p-1 rounded border border-gray-300 text-center text-sm focus:border-punjab focus:ring-1 focus:ring-punjab outline-none transition-all" placeholder="1">
+                        <span class="bg-gray-100 border border-gray-300 rounded-r px-1 h-full flex items-center text-[10px] text-gray-600 font-bold">${p.unit}</span>
+                    </div>
+                 </div>`;
+            } else if (type === 'shop' && p.id === 'p15') {
+                 // Turmeric (p15)
+                 customQtyInput = `
+                 <div class="flex items-center justify-between mb-2 px-1" onclick="event.stopPropagation()">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Quantity:</span>
+                    <div class="flex items-center h-8">
+                        <input type="number" min="1" value="1" id="qty-input-${p.id}" class="w-12 h-full p-1 rounded border border-gray-300 text-center text-sm focus:border-punjab focus:ring-1 focus:ring-punjab outline-none transition-all" placeholder="1">
+                        <span class="bg-gray-100 border border-gray-300 rounded-r px-1 h-full flex items-center text-[10px] text-gray-600 font-bold">${p.unit}</span>
+                    </div>
+                 </div>`;
             }
+
 
             let footerHtml = '';
             const priceId = `price-${swiperId}`;
@@ -944,6 +861,52 @@
                 </div>`;
         }
 
+        function renderBestsellers() {
+            const bestsellerIds = ["p1", "p2", "p3", "p5", "p7", "p16", "p20"];
+            const bestsellers = products.filter(p => bestsellerIds.includes(p.id) && p.isBestseller); 
+            const wrapper = document.getElementById('bestseller-wrapper');
+            if (!wrapper) return;
+            let html = '';
+            bestsellers.forEach(p => { html += createProductCard(p, 'bestseller'); });
+            wrapper.innerHTML = html;
+            new Swiper('.bestseller-swiper', {
+                slidesPerView: 1, spaceBetween: 30, loop: true, autoplay: { delay: 4000, disableOnInteraction: false },
+                navigation: { nextEl: '.bestseller-next', prevEl: '.bestseller-prev' },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } }
+            });
+            initMiniSwipers(wrapper);
+            lucide.createIcons();
+        }
+
+        function renderShopProducts(cat) {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+            const filtered = cat === 'All' ? products : products.filter(p => p.category === cat);
+            let html = '';
+            filtered.forEach((p, index) => { html += createProductCard(p, 'shop', index); });
+            grid.innerHTML = html;
+            initMiniSwipers(grid);
+            lucide.createIcons();
+        }
+
+        function initMiniSwipers(container) {
+            const swipers = container.querySelectorAll('.mini-swiper:not(.swiper-initialized)');
+            swipers.forEach(el => {
+                new Swiper(el, { spaceBetween: 0, centeredSlides: true, autoplay: { delay: 3000 + Math.random() * 2000, disableOnInteraction: false }, effect: 'fade', fadeEffect: { crossFade: true }, loop: el.querySelectorAll('.swiper-slide').length > 1, allowTouchMove: false });
+            });
+        }
+
+        function filterProducts(cat) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active', 'bg-punjab', 'text-white', 'border-punjab');
+                b.classList.add('text-punjab-dark', 'border-gray-300', 'bg-white');
+            });
+            event.target.classList.add('active', 'bg-punjab', 'text-white', 'border-punjab');
+            event.target.classList.remove('text-punjab-dark', 'border-gray-300', 'bg-white');
+            renderShopProducts(cat);
+        }
+
         function updateCardPriceAndButton(select, pid, swiperId) {
             const price = select.options[select.selectedIndex].getAttribute('data-price');
             document.getElementById(`price-${swiperId}`).innerText = `₹${price}`;
@@ -957,10 +920,7 @@
             const select = card.querySelector('select');
             const qtyInput = card.querySelector(`#qty-input-${pid}`);
             
-            // Get variant if exists
             if (select) variantUnit = select.value;
-            
-            // Get Custom Quantity
             if (qtyInput) {
                 const val = parseInt(qtyInput.value);
                 if (val > 0) qty = val;
@@ -991,59 +951,16 @@
             lucide.createIcons();
         }
 
-        function renderBestsellers() {
-            const bestsellerIds = ["p1", "p2", "p3", "p5", "p7", "p16", "p20"];
-            const bestsellers = products.filter(p => bestsellerIds.includes(p.id) && p.isBestseller); 
-            const wrapper = document.getElementById('bestseller-wrapper');
-            let html = '';
-            bestsellers.forEach(p => { html += createProductCard(p, 'bestseller'); });
-            wrapper.innerHTML = html;
-            new Swiper('.bestseller-swiper', {
-                slidesPerView: 1, spaceBetween: 30, loop: true, autoplay: { delay: 4000, disableOnInteraction: false },
-                navigation: { nextEl: '.bestseller-next', prevEl: '.bestseller-prev' },
-                pagination: { el: '.swiper-pagination', clickable: true },
-                breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1280: { slidesPerView: 4 } }
-            });
-            initMiniSwipers(wrapper);
-            lucide.createIcons();
-        }
-
-        function renderShopProducts(cat) {
-            const grid = document.getElementById('product-grid');
-            const filtered = cat === 'All' ? products : products.filter(p => p.category === cat);
-            let html = '';
-            filtered.forEach((p, index) => { html += createProductCard(p, 'shop', index); });
-            grid.innerHTML = html;
-            initMiniSwipers(grid);
-            lucide.createIcons();
-        }
-
-        function initMiniSwipers(container) {
-            const swipers = container.querySelectorAll('.mini-swiper:not(.swiper-initialized)');
-            swipers.forEach(el => {
-                new Swiper(el, { spaceBetween: 0, centeredSlides: true, autoplay: { delay: 3000 + Math.random() * 2000, disableOnInteraction: false }, effect: 'fade', fadeEffect: { crossFade: true }, loop: el.querySelectorAll('.swiper-slide').length > 1, allowTouchMove: false });
-            });
-        }
-
-        function filterProducts(cat) {
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('active', 'bg-punjab', 'text-white', 'border-punjab');
-                b.classList.add('text-punjab-dark', 'border-gray-300', 'bg-white');
-            });
-            event.target.classList.add('active', 'bg-punjab', 'text-white', 'border-punjab');
-            event.target.classList.remove('text-punjab-dark', 'border-gray-300', 'bg-white');
-            renderShopProducts(cat);
-        }
-
         function updateCartUI() {
             const items = Object.keys(cart);
             const container = document.getElementById('cart-items');
             const checkoutTotalEl = document.getElementById('checkout-total');
             const cartBadge = document.getElementById('cart-badge'); 
+            if (!container) return;
             let total = 0, count = 0;
             if(items.length===0) {
                 container.innerHTML = `<div class="text-center py-10 opacity-50"><p>Your Harvest Box is empty. Start collecting purity!</p></div>`;
-                cartBadge.classList.add('scale-0');
+                if (cartBadge) cartBadge.classList.add('scale-0');
             } else {
                 let html = '', summaryHtml = '';
                 items.forEach(compId => {
@@ -1056,13 +973,53 @@
                     summaryHtml += `<div class="flex justify-between items-center border-b border-punjab-gold/10 pb-2"><span>${details.name} (${details.unit}) x ${qty}</span><span class="font-bold">₹${subtotal}</span></div>`;
                 });
                 container.innerHTML = html;
-                if(document.getElementById('checkout-items-summary')) document.getElementById('checkout-items-summary').innerHTML = summaryHtml;
-                cartBadge.innerText = count;
-                cartBadge.classList.remove('scale-0');
+                const checkSumm = document.getElementById('checkout-items-summary');
+                if(checkSumm) checkSumm.innerHTML = summaryHtml;
+                if (cartBadge) {
+                    cartBadge.innerText = count;
+                    cartBadge.classList.remove('scale-0');
+                }
             }
-            document.getElementById('cart-total').innerText = `₹${total}`;
+            const cartTotal = document.getElementById('cart-total');
+            if (cartTotal) cartTotal.innerText = `₹${total}`;
             if(checkoutTotalEl) checkoutTotalEl.innerText = `₹${total}`;
             lucide.createIcons();
+        }
+
+        function openCartOverlay() {
+            const sb = document.getElementById('cart-sidebar');
+            const ov = document.getElementById('cart-overlay');
+            if (!sb) return;
+            sb.classList.remove('translate-x-full'); 
+            if (ov) {
+                ov.classList.remove('hidden'); 
+                setTimeout(()=>ov.classList.remove('opacity-0'),10);
+            }
+            if (window.location.hash !== '#cart') {
+                history.pushState(null, null, '#cart');
+            }
+        }
+
+        function closeCartOverlay() {
+             const sb = document.getElementById('cart-sidebar');
+             const ov = document.getElementById('cart-overlay');
+             if (sb && !sb.classList.contains('translate-x-full')) {
+                sb.classList.add('translate-x-full'); 
+                if (ov) {
+                    ov.classList.add('opacity-0'); 
+                    setTimeout(()=>ov.classList.add('hidden'),300);
+                }
+             }
+        }
+
+        function toggleCart() { 
+            const sb = document.getElementById('cart-sidebar');
+            if (sb && sb.classList.contains('translate-x-full')) {
+                openCartOverlay();
+            } else {
+                // If cart is open, history.back() closes it via hashchange listener
+                history.back(); 
+            }
         }
 
         function proceedToCheckout() {
@@ -1070,55 +1027,92 @@
                 showToast("Your Harvest Box is empty!");
                 return;
             }
-            // Close sidebar by going back in history (which triggers hashchange logic)
-            history.back();
-            // Then navigate to checkout
+            toggleCart();
             setTimeout(() => window.location.hash = '#checkout', 50);
         }
 
-        function finalizeOrder() { 
+        function finalizeOrder() {
             const form = document.getElementById('checkout-form');
-            // Manual check for form validity (pattern checks, required fields)
-            if (!form.checkValidity()) {
-                console.error("Please fill in all required form fields correctly.");
-                showToast("Please fill in all details!");
+            if (!form || !form.checkValidity()) {
+                console.error('Please fill in all required form fields correctly.');
+                showToast('Please fill in all details!');
                 return;
             }
 
             const fname = document.getElementById('fname').value;
             const lname = document.getElementById('lname').value;
-            // Removed +91 prefix from phone number for the form, using the input value
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
             const city = document.getElementById('city').value;
             const state = document.getElementById('state').value;
             const pincode = document.getElementById('pincode').value;
 
-            let msg = `*Namaste Nirog Organic!* 🌱\n\n*New Order Request*\n*Customer:* ${fname} ${lname}\n*Phone:* +91 ${phone}\n*Address:* ${address}, ${city}, ${state} - ${pincode}\n\n*Items:*\n`; 
-            let total = 0;
-            
-            Object.keys(cart).forEach(compId => { 
+            let totalAmount = 0;
+            Object.keys(cart).forEach(compId => {
                 const details = getProductDetails(compId);
-                if (details) {
-                    const qty = cart[compId]; 
-                    const subtotal = details.price * qty;
-                    total += subtotal; 
-                    msg += `▫️ ${details.name} (${details.unit}) x ${qty} = ₹${subtotal}\n`; 
+                if (details) totalAmount += details.price * cart[compId];
+            });
+
+            if (totalAmount === 0) {
+                showToast('Cart is empty!');
+                return;
+            }
+
+            const options = {
+                "key": "rzp_live_RsaIAX1aE8VMMbgOXLzcDihAjn",
+                "amount": totalAmount * 100, // Amount in paise
+                "currency": "INR",
+                "name": "Nirog Organic",
+                "description": "Organic Products Order",
+                "prefill": {
+                    "name": fname + " " + lname,
+                    "contact": phone
+                },
+                "theme": {
+                    "color": "#659D32"
+                },
+                "handler": function (response) {
+                    // SUCCESS - Payment completed
+                    console.log('Payment Success:', response);
+                    showToast('Payment Successful! Order confirmed.');
+                    
+                    // Clear cart
+                    cart = {};
+                    localStorage.removeItem('nirogCart');
+                    updateCartUI();
+                    
+                    // Redirect to home after 3 seconds
+                    setTimeout(() => {
+                        window.location.hash = 'home';
+                    }, 3000);
+                },
+                "modal": {
+                    "ondismiss": function() {
+                        // User closed the payment modal
+                        showToast('Payment cancelled. Please try again.');
+                    }
                 }
+            };
+
+            const rzp = new Razorpay(options);
+            
+            // Handle payment failure
+            rzp.on('payment.failed', function (response) {
+                console.error('Payment Failed:', response.error);
+                showToast('Payment failed: ' + response.error.description);
             });
             
-            msg += `\n*Subtotal: ₹${total}*\n(Shipping calculated at confirmation)`;
-            
-            // Open WhatsApp link
-            window.open(`https://wa.me/917009395451?text=${encodeURIComponent(msg)}`, '_blank'); 
-            
-            // Clear cart and show confirmation message 
-            cart = {};
-            localStorage.removeItem('nirogCart');
-            updateCartUI();
-            
-            showToast("Order Confirmed! Redirecting to WhatsApp.");
+            rzp.open();
         }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            handleHashChange();
+            window.addEventListener('hashchange', handleHashChange);
+            renderBestsellers();
+            updateCartUI();
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>
